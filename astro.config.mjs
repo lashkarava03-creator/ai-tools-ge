@@ -5,3 +5,4 @@ export default defineConfig({
   base: '/ai-tools-ge',
   outDir: 'docs'
 });
+
