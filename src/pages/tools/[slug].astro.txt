@@ -1,0 +1,23 @@
+---
+import tools from '../../data/tools.json';
+
+export function getStaticPaths() {
+  return tools.map(tool => ({
+    params: { slug: tool.name.toLowerCase().replace(/\s+/g, '-') },
+    props: { tool },
+  }));
+}
+
+const { tool } = Astro.props;
+---
+
+<main>
+  <h1>{tool.name}</h1>
+  <p>{tool.description}</p>
+
+  <p><strong>კატეგორია:</strong> {tool.category}</p>
+
+  <a href={tool.link} target="_blank">
+    გადადი ინსტრუმენტზე
+  </a>
+</main>

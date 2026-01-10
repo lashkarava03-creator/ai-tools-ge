@@ -1,0 +1,20 @@
+[
+  {
+    "name": "ChatGPT",
+    "description": "AI ჩათბოტი ტექსტის წერაში, იდეების გენერირებასა და კოდირებაში დასახმარებლად.",
+    "category": "ტექსტი",
+    "link": "https://chat.openai.com"
+  },
+  {
+    "name": "Midjourney",
+    "description": "AI ინსტრუმენტი სურათების გენერირებისთვის ტექსტური აღწერიდან.",
+    "category": "დიზაინი",
+    "link": "https://www.midjourney.com"
+  },
+  {
+    "name": "Runway",
+    "description": "AI ვიდეოების გენერაცია და მონტაჟი მარტივად.",
+    "category": "ვიდეო",
+    "link": "https://runwayml.com"
+  }
+]
