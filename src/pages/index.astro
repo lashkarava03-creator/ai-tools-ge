@@ -1,19 +1,15 @@
 ---
-import AICard from '../components/AICard.astro';
 import BaseHead from '../components/BaseHead.astro';
-import Footer from '../components/Footer.astro';
 import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import AICard from '../components/AICard.astro';
 import { SITE_DESCRIPTION, SITE_TITLE } from '../consts';
-import AICard from '../components/AICard.astro';
-import tools from '../data/tools.json';
-import AICard from '../components/AICard.astro';
-import tools from '../data/tools.json';
-import AICard from '../components/AICard.astro';
 import tools from '../data/tools.json';
 
+// უნიკალური კატეგორიები
 const categories = [...new Set(tools.map(tool => tool.category))];
 
-// ძებნის ტექსტი (ჯერ ცარიელია)
+// ძებნის ტექსტი URL-დან (?q=...)
 const searchQuery = Astro.url.searchParams.get('q') || '';
 
 // გაფილტრული ინსტრუმენტები
@@ -64,29 +60,57 @@ const filteredTools = tools.filter(tool =>
 </section>
 
 
-  
-  <section>
+ <section>
   <h2>AI ინსტრუმენტები</h2>
 
-  {categories.map(category => (
-    <div id={category} style="margin-top:40px;">
-      <h3>{category}</h3>
+  {searchQuery ? (
+  <div style="margin-top:24px;">
+    <p>
+      ნაპოვნია: <strong>{filteredTools.length}</strong>
+    </p>
 
-      <div style="display:grid; gap:16px; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));">
-        {filteredTools
-          .filter(tool => tool.category === category)
-          .map(tool => (
-            <AICard
-              name={tool.name}
-              description={tool.description}
-              category={tool.category}
-              link={tool.link}
-            />
-          ))}
-      </div>
+    {filteredTools.length === 0 && (
+      <p style="margin-top:20px; color:#666;">
+        ვერ მოიძებნა შესაბამისი AI ინსტრუმენტი
+      </p>
+    )}
+
+    <div style="display:grid; gap:16px; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));">
+      {filteredTools.map(tool => (
+        <AICard
+          name={tool.name}
+          description={tool.description}
+          category={tool.category}
+          link={tool.link}
+        />
+      ))}
     </div>
-  ))}
+  </div>
+) : (
+  <>
+    {categories.map(category => (
+      <div id={category} style="margin-top:40px;">
+        <h3>{category}</h3>
+
+        <div style="display:grid; gap:16px; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));">
+          {tools
+            .filter(tool => tool.category === category)
+            .map(tool => (
+              <AICard
+                name={tool.name}
+                description={tool.description}
+                category={tool.category}
+                link={tool.link}
+              />
+            ))}
+        </div>
+      </div>
+    ))}
+  </>
+)}
+
 </section>
+
 
 
 
