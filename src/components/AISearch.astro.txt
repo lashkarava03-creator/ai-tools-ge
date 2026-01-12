@@ -1,0 +1,38 @@
+---
+import AICard from './AICard.astro';
+import tools from '../data/tools.json';
+---
+
+<div>
+  <input
+    type="text"
+    placeholder="მოძებნე AI ინსტრუმენტი..."
+    oninput="filterTools(this.value)"
+    style="padding:10px; width:100%; max-width:400px; border-radius:8px; border:1px solid #ddd;"
+  />
+
+  <div id="results" style="margin-top:24px; display:grid; gap:16px; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));">
+    {tools.map(tool => (
+      <div class="tool-card" data-name={tool.name.toLowerCase()} data-desc={tool.description.toLowerCase()}>
+        <AICard
+          name={tool.name}
+          description={tool.description}
+          category={tool.category}
+          link={tool.link}
+        />
+      </div>
+    ))}
+  </div>
+</div>
+
+<script>
+  function filterTools(query) {
+    const q = query.toLowerCase();
+    document.querySelectorAll('.tool-card').forEach(card => {
+      const name = card.dataset.name;
+      const desc = card.dataset.desc;
+      card.style.display =
+        name.includes(q) || desc.includes(q) ? 'block' : 'none';
+    });
+  }
+</script>
