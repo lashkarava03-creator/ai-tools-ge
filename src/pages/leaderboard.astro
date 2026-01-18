@@ -1,0 +1,49 @@
+---
+import BaseHead from '../components/BaseHead.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import { featuredTools } from '../data/featuredTools';
+import AICard from '../components/AICard.astro';
+
+const leaderboard = featuredTools
+  .slice()
+  .sort((a, b) => a.rank - b.rank);
+---
+
+<!doctype html>
+<html lang="ka">
+  <head>
+    <BaseHead
+      title="Leaderboard — AIBoisho"
+      description="ყველაზე პოპულარული და ლიდერი AI ინსტრუმენტები საქართველოში"
+    />
+  </head>
+  <body>
+    <Header />
+
+    <main>
+      <section class="hero" style="min-height: 40vh;">
+        <h1>
+          🏆 <span class="gold-text">AI Leaderboard</span>
+        </h1>
+        <p>
+          ყველაზე პოპულარული და გამორჩეული AI ინსტრუმენტები ამ მომენტისთვის
+        </p>
+      </section>
+
+      <section style="max-width: 1100px; margin: 0 auto; padding: 40px 20px;">
+        {leaderboard.map(tool => (
+          <AICard
+            name={tool.name}
+            description={tool.description}
+            category={tool.category}
+            link={tool.link}
+            featured={tool.featured}
+          />
+        ))}
+      </section>
+    </main>
+
+    <Footer />
+  </body>
+</html>
